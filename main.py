@@ -4,7 +4,6 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
 import time
 
 # killallahandallmuslim@pixelpaste.net
@@ -38,6 +37,17 @@ while True:
         driver.find_element(by=By.XPATH,value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/sa/idms-flow/div/section/iforgot-nav/div/div/div[1]/div/div/button[2]").click()
         time.sleep(5)
         driver.get("https://mail.hostinger.com")
+        driver.find_element(by=By.ID,value="rcmloginuser").send_keys(apple_id)
+        driver.find_element(by=By.ID, value="rcmloginpwd").send_keys("Krevory123@")
+        driver.find_element(by=By.ID, value="rcmloginsubmit").click()
+        WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.CLASS_NAME, 'message')))
+        driver.find_element(by=By.CLASS_NAME,value="message").click()
+        WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'div p p p p a')))
+        iforgot_url = driver.find_element(by=By.CSS_SELECTOR,value="div p p p p a")
+        unlock_url = iforgot_url.get_attribute("href")
+        driver.get(unlock_url)
+
+        time.sleep(60)
 
     elif msg == "Confirm your phone number":
         print("Apple ID Has 2FA")
