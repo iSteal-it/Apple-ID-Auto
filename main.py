@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException ,TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
@@ -29,7 +29,7 @@ while True:
     try:
         WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.CLASS_NAME, 'subtitle')))
         msg = driver.find_element(by=By.CLASS_NAME, value="subtitle").get_attribute("innerHTML")
-    except NoSuchElementException:
+    except (NoSuchElementException , TimeoutException) as error:
         WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.CLASS_NAME, 'app-title')))
         msg = driver.find_element(by=By.CLASS_NAME, value="app-title").get_attribute("innerHTML")
 
@@ -66,9 +66,7 @@ while True:
 
     elif msg == "Confirm your phone number":
         print("Apple ID Has 2FA")
-        WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.CLASS_NAME,'button-caption-link')))
-        driver.find_element(by=By.XPATH,value="button-caption-link").click()
-        # WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH,'/html/body/div[6]/div/div/recovery-unenroll-start/div/idms-step/div/div/div/div[3]/idms-toolbar/div/div/div/button[1]')))
-        # driver.find_element(by=By.XPATH,value="/html/body/div[6]/div/div/recovery-unenroll-start/div/idms-step/div/div/div/div[3]/idms-toolbar/div/div/div/button[1]").click()
-
+        WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH,'/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/trusted-phone-number/div/div/div[1]/idms-step/div/div/div/div[2]/div/div/div/button')))
+        driver.find_element(by=By.XPATH,value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/trusted-phone-number/div/div/div[1]/idms-step/div/div/div/div[2]/div/div/div/button").click()
+        
         time.sleep(60)
