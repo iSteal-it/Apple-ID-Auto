@@ -24,7 +24,7 @@ while True:
     driver.get("https://iforgot.apple.com")
     enter_mail = driver.find_element(by=By.XPATH,
                                      value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/global-v2/div/idms-flow/div/forgot-password/div/div/div[1]/idms-step/div/div/div/div[2]/div/div[1]/div/div/idms-textbox/idms-error-wrapper/div/div/input")
-    response = requests.get("https://pixelpaste.net/pwd")
+    response = requests.get("")
     data = response.json()
     apple_id = data["apple"]
     enter_mail.send_keys(apple_id)
@@ -48,7 +48,7 @@ while True:
         driver.close()
         driver = webdriver.Chrome(service=service, options=options)
         driver.get("https://mail.hostinger.com")
-        response = requests.get("https://pixelpaste.net/pwd")
+        response = requests.get("")
         data = response.json()
         apple_id = data["apple"]
         driver.find_element(by=By.ID,value="rcmloginuser").send_keys(apple_id)
@@ -66,7 +66,7 @@ while True:
         driver.get(unlock_url)
         driver.find_element(by=By.XPATH,value="/html/body/div[1]/iforgot/div/iforgot-body/sa/idms-flow/div/section/div/web-reset-options/div[2]/div[2]/div/button").click()
         WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH, '/html/body/div[1]/iforgot/div/iforgot-body/sa/idms-flow/div/section/div/web-current-password/div[2]/div[1]/idms-textbox/idms-error-wrapper/div/div/input')))
-        response = requests.get("https://pixelpaste.net/pwd")
+        response = requests.get("")
         data = response.json()
         password = data["pass"]
         driver.find_element(by=By.XPATH,value="/html/body/div[1]/iforgot/div/iforgot-body/sa/idms-flow/div/section/div/web-current-password/div[2]/div[1]/idms-textbox/idms-error-wrapper/div/div/input").send_keys(password)
